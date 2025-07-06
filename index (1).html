@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret DM</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4em;
+            text-shadow: 0 0 10px #0f0;
+            margin-bottom: 20px;
+        }
+        .subtext {
+            margin-bottom: 20px;
+            color: #aaa;
+        }
+        input {
+            background: #111;
+            border: 1px solid #0f0;
+            color: white;
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #0f0;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0d0;
+        }
+    </style>
+</head>
+<body>
+    <h1>HELLO I'M NOXY (ig...)</h1>
+    <div class="subtext">pls type in ur dc name ill dm you</div>
+    <input type="text" id="dcName" placeholder="YourDiscordName#1234">
+    <button onclick="sendToDiscord()">SEND</button>
+
+    <script>
+        async function sendToDiscord() {
+            const name = document.getElementById("dcName").value.trim();
+            if (!name) return alert("Please enter a name!");
+
+            // ERSETZE DIESE URL MIT DEINEM DISCORD-WEBHOOK!
+            const WEBHOOK_URL = "https://discord.com/api/webhooks/1388941060230746323/Zy4sYUKkkezroh5UabIvGLHP5Vfe3BZQ5uvwOMkWyxKqPdJWoYKcQt3sxp6dfcWy-kvL";
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        content: `📩 New DM request from: **${name}**`
+                    })
+                });
+
+                if (response.ok) {
+                    alert("Sent! I'll DM you soon 😉");
+                    document.getElementById("dcName").value = "";
+                } else {
+                    alert("Error sending. Try again later.");
+                }
+            } catch (err) {
+                console.error("Error:", err);
+                alert("Failed to send. Check console.");
+            }
+        }
+    </script>
+    
+    
+     <script src="script.js"></script> 
+</body>
+</html>
